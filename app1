@@ -1,0 +1,50 @@
+#/usr/bin/env bash
+
+readonly version="v0.1"
+
+T_getVersion() {
+    local result=$(main -v)
+    [[ "$result" == "$version" ]]
+}
+
+T_getUsage() {
+    local result=$(main help)
+    [[ "$result" =~ ^Usage.* ]]
+}
+
+T_helloWorld() {
+    local result=$(main hello)
+    [[ "$result" == "Hello World" ]]
+}
+
+T_helloBash() {
+    local result=$(main hello bash)
+    [[ "$result" == "Hello bash" ]]
+}
+
+usage() {
+    echo "Usage: app1 [-v] subcommand"
+    echo
+    echo "Subcommands:"
+    echo "  hello"
+    echo "  help"
+    echo
+    exit 1
+}
+
+hello() {
+    local world="${@:-World}"
+    echo "Hello ${world}"
+}
+
+main() {
+    set -eo pipefail; [[ "$TRACE" ]] && set -x
+    case "$1" in
+        hello)      shift; hello "$@";;
+        help)       shift; usage "$@";;
+        -v)         echo "$version";;
+        *)          usage;;
+    esac
+}
+
+[[ "$0" == "$BASH_SOURCE" ]] && main "$@"
