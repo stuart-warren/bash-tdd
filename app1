@@ -23,6 +23,7 @@ T_helloBash() {
 }
 
 usage() {
+    declare desc="echo out usage message"
     echo "Usage: app1 [-v] subcommand"
     echo
     echo "Subcommands:"
@@ -33,6 +34,7 @@ usage() {
 }
 
 hello() {
+    declare desc="echo out 'Hello ' along with given string"
     local world="${@:-World}"
     echo "Hello ${world}"
 }
