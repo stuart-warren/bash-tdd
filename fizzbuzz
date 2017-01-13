@@ -2,6 +2,8 @@
 
 readonly version="v0.1"
 
+# testing main
+
 T_getVersion() {
     local result="$(main -v)"
     [[ "$result" == "$version" ]]
@@ -23,6 +25,8 @@ T_validParam() {
 	local result="$(main 1)"
 	[[ "$result" == "1" ]]
 }
+
+# testing functions
 
 T_validNumber() {
 	local result="$(isPosNumber 2)"
@@ -82,6 +86,8 @@ Fizz
 4
 Buzz" ]]
 }
+
+# actual code
 
 isPosNumber() {
 	declare desc="is parameter a positive integer?"
