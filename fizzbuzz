@@ -14,7 +14,7 @@ T_notVersion() {
 
 T_notValidParam() {	
 	local result="$(main -3)"
-	[[ "$result" == "Not a positive number" ]]
+	[[ "$result" == "Not a positive number" ]] || return 1
 	local result="$(main foo)"
 	[[ "$result" == "Not a positive number" ]]
 }
@@ -31,7 +31,7 @@ T_validNumber() {
 
 T_invalidNumber() {
 	local result="$(isPosNumber foo)"
-	[[ "$result" == false ]]
+	[[ "$result" == false ]] || return 1
 	local result="$(isPosNumber -3)"
 	[[ "$result" == false ]]
 }
@@ -43,38 +43,38 @@ T_doNotFizzbuzz() {
 
 T_doFizzBuzz() {
 	local result="$(fizzbuzz 15)"
-	[[ "$result" == "FizzBuzz" ]]
+	[[ "$result" == "FizzBuzz" ]] || return 1
 	local result="$(fizzbuzz 30)"
-	[[ "$result" == "FizzBuzz" ]]
+	[[ "$result" == "FizzBuzz" ]] || return 1
 	local result="$(fizzbuzz 90)"
 	[[ "$result" == "FizzBuzz" ]]
 }
 
 T_doFizz() {
 	local result="$(fizzbuzz 3)"
-	[[ "$result" == "Fizz" ]]
+	[[ "$result" == "Fizz" ]] || return 1
 	local result="$(fizzbuzz 9)"
-	[[ "$result" == "Fizz" ]]
+	[[ "$result" == "Fizz" ]] || return 1
 	local result="$(fizzbuzz 99)"
 	[[ "$result" == "Fizz" ]]
 }
 
 T_doBuzz() {
 	local result="$(fizzbuzz 5)"
-	[[ "$result" == "Buzz" ]]
+	[[ "$result" == "Buzz" ]] || return 1
 	local result="$(fizzbuzz 50)"
-	[[ "$result" == "Buzz" ]]
+	[[ "$result" == "Buzz" ]] || return 1
 	local result="$(fizzbuzz 55)"
-	[[ "$result" == "Buzz" ]]
+	[[ "$result" == "Buzz" ]] || return 1
 }
 
 T_doLoop() {
 	local result="$(loop 1)"
-	[[ "$result" == "1" ]]
+	[[ "$result" == "1" ]] || return 1
 	local result="$(loop 3)"
 	[[ "$result" == "1
 2
-Fizz" ]]
+Fizz" ]] || return 1
 	local result="$(loop 5)"
 	[[ "$result" == "1
 2
