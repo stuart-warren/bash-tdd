@@ -12,4 +12,5 @@ Use [basht](https://github.com/progrium/basht)
 
 ```
 basht ./app1
+basht ./fizzbuzz
 ```
