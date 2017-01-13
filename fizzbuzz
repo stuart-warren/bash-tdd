@@ -12,6 +12,18 @@ T_notVersion() {
     [[ "$result" == "1" ]]
 }
 
+T_notValidParam() {	
+	local result="$(main -3)"
+	[[ "$result" == "Not a positive number" ]]
+	local result="$(main foo)"
+	[[ "$result" == "Not a positive number" ]]
+}
+
+T_validParam() {	
+	local result="$(main 1)"
+	[[ "$result" == "1" ]]
+}
+
 T_validNumber() {
 	local result="$(isPosNumber 2)"
 	[[ "$result" == true ]]
