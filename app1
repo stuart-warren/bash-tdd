@@ -3,22 +3,22 @@
 readonly version="v0.1"
 
 T_getVersion() {
-    local result=$(main -v)
+    local result="$(main -v)"
     [[ "$result" == "$version" ]]
 }
 
 T_getUsage() {
-    local result=$(main help)
+    local result="$(main help)"
     [[ "$result" =~ ^Usage.* ]]
 }
 
 T_helloWorld() {
-    local result=$(main hello)
+    local result="$(main hello)"
     [[ "$result" == "Hello World" ]]
 }
 
 T_helloBash() {
-    local result=$(main hello bash)
+    local result="$(main hello bash)"
     [[ "$result" == "Hello bash" ]]
 }
 
@@ -42,10 +42,10 @@ hello() {
 main() {
     set -eo pipefail; [[ "$TRACE" ]] && set -x
     case "$1" in
-        hello)      shift; hello "$@";;
-        help)       shift; usage "$@";;
-        -v)         echo "$version";;
-        *)          usage;;
+        "hello")      shift; hello "$@";;
+        "help")       shift; usage "$@";;
+        "-v")         echo "$version";;
+        *)            usage;;
     esac
 }
 

@@ -3,62 +3,67 @@
 readonly version="v0.1"
 
 T_getVersion() {
-    local result=$(main -v)
+    local result="$(main -v)"
     [[ "$result" == "$version" ]]
 }
 
+T_notVersion() {
+    local result="$(main 1)"
+    [[ "$result" == "1" ]]
+}
+
 T_validNumber() {
-	local result=$(isPosNumber 2)
+	local result="$(isPosNumber 2)"
 	[[ "$result" == true ]]
 }
 
 T_invalidNumber() {
-	local result=$(isPosNumber foo)
+	local result="$(isPosNumber foo)"
 	[[ "$result" == false ]]
-	local result=$(isPosNumber -3)
+	local result="$(isPosNumber -3)"
 	[[ "$result" == false ]]
 }
 
 T_doNotFizzbuzz() {
-	local result=$(fizzbuzz 1)
+	local result="$(fizzbuzz 1)"
 	[[ "$result" == "1" ]]
 }
 
 T_doFizzBuzz() {
-	local result=$(fizzbuzz 15)
+	local result="$(fizzbuzz 15)"
 	[[ "$result" == "FizzBuzz" ]]
-	local result=$(fizzbuzz 30)
+	local result="$(fizzbuzz 30)"
 	[[ "$result" == "FizzBuzz" ]]
-	local result=$(fizzbuzz 90)
+	local result="$(fizzbuzz 90)"
 	[[ "$result" == "FizzBuzz" ]]
 }
 
 T_doFizz() {
-	local result=$(fizzbuzz 3)
+	local result="$(fizzbuzz 3)"
 	[[ "$result" == "Fizz" ]]
-	local result=$(fizzbuzz 9)
+	local result="$(fizzbuzz 9)"
 	[[ "$result" == "Fizz" ]]
-	local result=$(fizzbuzz 99)
+	local result="$(fizzbuzz 99)"
 	[[ "$result" == "Fizz" ]]
 }
 
 T_doBuzz() {
-	local result=$(fizzbuzz 5)
+	local result="$(fizzbuzz 5)"
 	[[ "$result" == "Buzz" ]]
-	local result=$(fizzbuzz 50)
+	local result="$(fizzbuzz 50)"
 	[[ "$result" == "Buzz" ]]
-	local result=$(fizzbuzz 55)
+	local result="$(fizzbuzz 55)"
 	[[ "$result" == "Buzz" ]]
 }
 
 T_doLoop() {
-	local result=$(loop 1)
+	local result="$(loop 1)"
 	[[ "$result" == "1" ]]
-	local result=$(loop 3)
+	local result="$(loop 3)"
 	[[ "$result" == "1
 2
 Fizz" ]]
-	local result=$(loop 5)
+	local result="$(loop 5)"
 	[[ "$result" == "1
 2
 Fizz
@@ -73,12 +78,12 @@ isPosNumber() {
 
 fizzbuzz() {
 	declare desc="if fiven parameter divides by 3, echo Fizz, by 5, echo Buzz, by 3 + 5, echo FizzBuzz"
-	local given=$1
-	if [[ $(expr "$given" % 15) -eq 0 ]]; then
+	local given="$1"
+	if [[ "$(expr $given % 15)" -eq 0 ]]; then
 		echo "FizzBuzz"
-	elif [[ $(expr "$given" % 3) -eq 0 ]]; then
+	elif [[ "$(expr $given % 3)" -eq 0 ]]; then
 		echo "Fizz"
-	elif [[ $(expr "$given" % 5) -eq 0 ]]; then
+	elif [[ "$(expr $given % 5)" -eq 0 ]]; then
 		echo "Buzz"
 	else
 		echo "$given"
@@ -100,8 +105,8 @@ loop() {
 main() {
     set -eo pipefail; [[ "$TRACE" ]] && set -x
     case "$1" in
-        -v)         echo "$version";;
-        *)          loop "$@";;
+        "-v")         echo "$version";;
+        *)            loop "$@";;
     esac
 }
 
